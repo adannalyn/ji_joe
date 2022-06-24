@@ -1,1 +1,1 @@
-# ji_joe
+# Django CRUD
