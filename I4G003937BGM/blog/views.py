@@ -1,4 +1,5 @@
-from audioop import reverse
+from django.urls import reverse
+from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
@@ -9,28 +10,26 @@ from .models import Post
 class PostListView(ListView):
     model: Post
     template_name = 'home.html'
-    success_url = reverse_lazy("blog:post")
     def get_queryset(self):
         """Return Post """
-        return Post.objects.order_by('id')
+        return Post.objects.order_by('title')[:5]
     
     
 class PostCreateView(CreateView):
     model = Post
     fields = "__all__"
-    success_url = reverse_lazy("blog:post")
+    template_name = 'home.html'
     
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog.html'
-    success_url = reverse_lazy("blog:post")
     
 class PostUpdateView(UpdateView):
     model = Post
     fields = "__all__"
-    success_url = reverse_lazy("blog:post")
+    template_name = 'home.html'
     
 class PostDeleteView(UpdateView):
     model = Post
     fields = "__all__"
-    success_url = reverse_lazy("blog:post")
+    template_name = 'home.html'
